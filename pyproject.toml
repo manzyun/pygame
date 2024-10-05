@@ -1,0 +1,83 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pygame-tutorial-3rd-party"
+dynamic = ["version"]
+description = "I'm try upgrade for Python 3.x on my idle times."
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+  { name = "aidiary", emali = "f2forest@gmail.com" },
+  { name = "manzyun", email = "manzyun@gmail.com" }
+]
+maintainers =[ { name = "manzyun", email = "manzyun@gmail.com" } ]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+[project.optional-dependencies]
+dev-must = [
+  "black",
+  "flake8"
+]
+dev-suggest = [
+  "pyright",
+  "ruff"
+]
+newbie = [
+  "pudb",
+  "pygame-tutorial-3rd-party[dev_must]"
+]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pygame"
+]
+
+[tool.hatch.envs.default.scripts]
+test = 'python -m unittest'
+
+[project.urls]
+Documentation = "https://aidiary.hatenablog.com/entry/20080507/1269694935"
+Source = "https://github.com/manzyun/pygame"
+Original = "https://github.com/aidiary/pygame"
+
+[tool.hatch.version]
+path = "src/pygame_tutorial_3rd_party/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/pygame_tutorial_3rd_party tests}"
+
+[tool.coverage.run]
+source_pkgs = ["pygame_tutorial_3rd_party", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/pygame_tutorial_3rd_party/__about__.py",
+]
+
+[tool.coverage.paths]
+pygame_tutorial_3rd_party = ["src/pygame_tutorial_3rd_party", "*/pygame-tutorial-3rd-party/src/pygame_tutorial_3rd_party"]
+tests = ["tests", "*/pygame-tutorial-3rd-party/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
