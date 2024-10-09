@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
-import os
 import math
+import os
 import random
 import sys
+
+import pygame
+from pygame.locals import *
 
 # 参考：http://scriptedfun.com
 # 画像：http://www.flyingyogi.com/fun/spritelib.html
@@ -383,7 +384,7 @@ class PlaneExplosion(pygame.sprite.Sprite):
         if self.frame == self.max_frame:
             self.kill()
 
-class ScoreBoard():
+class ScoreBoard:
     """スコアボード"""
     def __init__(self):
         self.score = 0

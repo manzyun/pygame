@@ -1,8 +1,9 @@
 #!/usr/bin/env python
+import sys
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-import sys
 
 earth_angle = 0.0
 moon_angle = 0.0

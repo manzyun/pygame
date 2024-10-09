@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import os
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 640, 480)
 
@@ -27,7 +28,7 @@ def main():
     # 自機を作成
     Player()
     # エイリアンを作成
-    for i in range(0, 50):
+    for i in range(50):
         x = 20 + (i % 10) * 40
         y = 20 + (i // 10) * 40
         Alien((x,y))
@@ -42,10 +43,7 @@ def main():
         all.draw(screen)
         pygame.display.update()
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == KEYDOWN and event.key == K_ESCAPE:
+            if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                 pygame.quit()
                 sys.exit()
 

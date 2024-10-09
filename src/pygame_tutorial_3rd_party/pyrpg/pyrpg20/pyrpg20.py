@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import codecs
 import os
 import random
 import struct
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 640, 480)
 GS = 32
@@ -63,7 +64,7 @@ def main():
 def load_sounds(dir, file):
     """サウンドをロードしてsoundsに格納"""
     file = os.path.join(dir, file)
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()
         data = line.split(",")
@@ -75,7 +76,7 @@ def load_sounds(dir, file):
 def load_charachips(dir, file):
     """キャラクターチップをロードしてCharacter.imagesに格納"""
     file = os.path.join(dir, file)
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()
         data = line.split(",")
@@ -87,7 +88,7 @@ def load_charachips(dir, file):
 def load_mapchips(dir, file):
     """マップチップをロードしてMap.imagesに格納"""
     file = os.path.join(dir, file)
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()
         data = line.split(",")
@@ -427,7 +428,7 @@ class MessageEngine:
         """文字色をセット"""
         self.color = color
         # 変な値だったらWHITEにする
-        if not self.color in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
+        if self.color not in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
             self.color = self.WHITE
     def draw_character(self, screen, pos, ch):
         """1文字だけ描画する"""
@@ -567,7 +568,7 @@ class MessageWindow(Window):
             self.cur_pos = 0
             self.next_flag = False
 
-class MoveEvent():
+class MoveEvent:
     """移動イベント"""
     def __init__(self, pos, mapchip, dest_map, dest_pos):
         self.x, self.y = pos[0], pos[1]  # イベント座標

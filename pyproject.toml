@@ -14,6 +14,7 @@ authors = [
   { name = "manzyun", email = "manzyun@gmail.com" }
 ]
 maintainers =[ { name = "manzyun", email = "manzyun@gmail.com" } ]
+keywords = ["tutorial", "pygame", "samples"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
@@ -25,28 +26,17 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-
-[project.optional-dependencies]
-dev-must = [
-  "black",
-  "flake8"
-]
-dev-suggest = [
-  "pyright",
-  "ruff"
-]
-newbie = [
-  "pudb",
-  "pygame-tutorial-3rd-party[dev_must]"
-]
-
-[tool.hatch.envs.default]
 dependencies = [
   "pygame"
 ]
 
+[project.optional-dependencies]
+newbie = [
+  "pudb",
+]
+
 [tool.hatch.envs.default.scripts]
-test = 'python -m unittest'
+basic-01 = "python src/pygame_tutorial_3rd_party/01_basic/01_window/"
 
 [project.urls]
 Documentation = "https://aidiary.hatenablog.com/entry/20080507/1269694935"

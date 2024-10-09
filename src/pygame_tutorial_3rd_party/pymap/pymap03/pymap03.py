@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import os
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 800, 640)
 GS = 32
@@ -35,10 +36,7 @@ def main():
             cursor.draw(screen, offset)
         pygame.display.update()
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == KEYDOWN and event.key == K_ESCAPE:
+            if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                 pygame.quit()
                 sys.exit()
             elif event.type == KEYDOWN and event.key == K_SPACE:
@@ -184,7 +182,7 @@ def calc_offset(cursor):
 
 def load_mapchips(file):
     """マップチップをロードしてMap.imagesに格納"""
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()  # 改行除去
         data = line.split(",")  # カンマで分解

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
+import codecs
 import os
 import struct
 import sys
-import codecs
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 800, 640)
 INPUT_RECT = Rect(240, 302, 320, 36)
@@ -51,10 +52,7 @@ def main():
             msg_engine.draw_string(screen, (10,86), "%d　%d" % (selectx, selecty))
         pygame.display.update()
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == KEYDOWN and event.key == K_ESCAPE:
+            if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                 pygame.quit()
                 sys.exit()
             elif event.type == KEYDOWN and event.key == K_SPACE:
@@ -236,7 +234,7 @@ def calc_offset(cursor):
 def load_mapchips(dir, file):
     """マップチップをロードしてMap.imagesに格納"""
     file = os.path.join(dir, file)
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()  # 改行除去
         data = line.split(",")  # カンマで分解
@@ -259,7 +257,7 @@ class MessageEngine:
         """文字色をセット"""
         self.color = color
         # 変な値だったらWHITEにする
-        if not self.color in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
+        if self.color not in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
             self.color = self.WHITE
     def draw_character(self, screen, pos, ch):
         """1文字だけ描画する"""
@@ -337,7 +335,7 @@ class InputWindow(Window):
                 break
             elif K_0 <= key <= K_9 or K_a <= key <= K_z:
                 cur_str.append(chr(key).upper())
-            self.draw(screen, question + u"　" + "".join(cur_str))
+            self.draw(screen, question + "　" + "".join(cur_str))
         return "".join(cur_str)
 
 if __name__ == "__main__":

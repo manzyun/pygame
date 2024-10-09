@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import os
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 640, 480)
 
@@ -54,10 +55,7 @@ class PyAction:
 
     def key_handler(self):
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == KEYDOWN and event.key == K_ESCAPE:
+            if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                 pygame.quit()
                 sys.exit()
 
@@ -229,7 +227,7 @@ class Map:
     def load(self, filename):
         """マップをロードしてスプライトを作成"""
         map = []
-        fp = open(filename, "r")
+        fp = open(filename)
         for line in fp:
             line = line.rstrip()  # 改行除去
             map.append(list(line))

@@ -1,8 +1,9 @@
 #!/usr/bin/env python
+import sys
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-import sys
 
 # 照明
 light_ambient = [1.0, 1.0, 1.0, 1.0]    # 環境光（白色）

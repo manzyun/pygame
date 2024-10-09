@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import codecs
 import os
 import random
 import struct
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 640, 480)
 GS = 32
@@ -58,10 +59,9 @@ def main():
                 cmdwnd_handler(event, cmdwnd, msgwnd, player, map)
             elif msgwnd.is_visible:
                 msgwnd.next()  # 次ページへ
-            else:
-                if event.type == KEYDOWN and event.key == K_SPACE:
-                    sounds["pi"].play()
-                    cmdwnd.show()
+            elif event.type == KEYDOWN and event.key == K_SPACE:
+                sounds["pi"].play()
+                cmdwnd.show()
 
 def cmdwnd_handler(event, cmdwnd, msgwnd, player, map):
     """コマンドウィンドウが開いているときのイベント処理"""
@@ -142,7 +142,7 @@ def show_info(screen, msg_engine, player, map):
 def load_sounds(dir, file):
     """サウンドをロードしてsoundsに格納"""
     file = os.path.join(dir, file)
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()
         data = line.split(",")
@@ -154,7 +154,7 @@ def load_sounds(dir, file):
 def load_charachips(dir, file):
     """キャラクターチップをロードしてCharacter.imagesに格納"""
     file = os.path.join(dir, file)
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()
         data = line.split(",")
@@ -166,7 +166,7 @@ def load_charachips(dir, file):
 def load_mapchips(dir, file):
     """マップチップをロードしてMap.imagesに格納"""
     file = os.path.join(dir, file)
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()
         data = line.split(",")
@@ -568,7 +568,7 @@ class MessageEngine:
         """文字色をセット"""
         self.color = color
         # 変な値だったらWHITEにする
-        if not self.color in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
+        if self.color not in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
             self.color = self.WHITE
     def draw_character(self, screen, pos, ch):
         """1文字だけ描画する"""
@@ -710,7 +710,7 @@ class MessageWindow(Window):
 
 class CommandWindow(Window):
     LINE_HEIGHT = 8  # 行間の大きさ
-    TALK, STATUS, EQUIPMENT, DOOR, SPELL, ITEM, TACTICS, SEARCH = range(0, 8)
+    TALK, STATUS, EQUIPMENT, DOOR, SPELL, ITEM, TACTICS, SEARCH = range(8)
     COMMAND = ["はなす", "つよさ", "そうび", "とびら",
                "じゅもん", "どうぐ", "さくせん", "しらべる"]
     def __init__(self, rect, msg_engine):
@@ -724,7 +724,7 @@ class CommandWindow(Window):
         Window.draw(self, screen)
         if self.is_visible == False: return
         # はなす、つよさ、そうび、とびらを描画
-        for i in range(0, 4):
+        for i in range(4):
             dx = self.text_rect[0] + MessageEngine.FONT_WIDTH
             dy = self.text_rect[1] + (self.LINE_HEIGHT+MessageEngine.FONT_HEIGHT) * (i % 4)
             self.msg_engine.draw_string(screen, (dx,dy), self.COMMAND[i])
@@ -742,7 +742,7 @@ class CommandWindow(Window):
         self.command = self.TALK  # 追加
         self.is_visible = True
 
-class MoveEvent():
+class MoveEvent:
     """移動イベント"""
     def __init__(self, pos, mapchip, dest_map, dest_pos):
         self.x, self.y = pos[0], pos[1]  # イベント座標
@@ -760,7 +760,7 @@ class MoveEvent():
     def __str__(self):
         return "MOVE,%d,%d,%d,%s,%d,%d" % (self.x, self.y, self.mapchip, self.dest_map, self.dest_x, self.dest_y)
 
-class Treasure():
+class Treasure:
     """宝箱"""
     def __init__(self, pos, item):
         self.x, self.y = pos[0], pos[1]  # 宝箱座標

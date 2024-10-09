@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import codecs
 import os
 import random
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 640, 480)
 GS = 32
@@ -46,13 +47,13 @@ def main():
         wnd.draw(screen)
         # メッセージエンジンで文字列を描画
         msg_engine.set_color(MessageEngine.WHITE)
-        msg_engine.draw_string(screen, (0, 0), u"メッセージエンジンをつかうと")
+        msg_engine.draw_string(screen, (0, 0), "メッセージエンジンをつかうと")
         msg_engine.set_color(MessageEngine.RED)
-        msg_engine.draw_string(screen, (30, 30), u"すきなばしょに　もじをびょうができます。")
+        msg_engine.draw_string(screen, (30, 30), "すきなばしょに　もじをびょうができます。")
         msg_engine.set_color(MessageEngine.GREEN)
-        msg_engine.draw_string(screen, (60, 60), u"ただし　かんじはつかえません。")
+        msg_engine.draw_string(screen, (60, 60), "ただし　かんじはつかえません。")
         msg_engine.set_color(MessageEngine.BLUE)
-        msg_engine.draw_string(screen, (90, 90), u"でも　なんとかよめるでしょ？")
+        msg_engine.draw_string(screen, (90, 90), "でも　なんとかよめるでしょ？")
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -301,7 +302,7 @@ class MessageEngine:
         """文字色をセット"""
         self.color = color
         # 変な値だったらWHITEにする
-        if not self.color in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
+        if self.color not in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
             self.color = self.WHITE
     def draw_character(self, screen, pos, ch):
         """1文字だけ描画する"""

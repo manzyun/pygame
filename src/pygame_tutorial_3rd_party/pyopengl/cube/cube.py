@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+import sys
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-import sys
+
 
 def main():
     glutInit(sys.argv)

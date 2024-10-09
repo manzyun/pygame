@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import codecs
 import os
 import random
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 640, 480)
 GS = 32

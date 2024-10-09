@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
+import codecs
 import os
 import sys
-import codecs
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 800, 640)
 GS = 32
@@ -45,13 +46,10 @@ def main():
             selectx = (px + offset[0]) / GS
             selecty = (py + offset[1]) / GS
             msg_engine.draw_string(screen, (10,56), map.name)
-            msg_engine.draw_string(screen, (10,86), u"%d　%d" % (selectx, selecty))
+            msg_engine.draw_string(screen, (10,86), "%d　%d" % (selectx, selecty))
         pygame.display.update()
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == KEYDOWN and event.key == K_ESCAPE:
+            if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                 pygame.quit()
                 sys.exit()
             elif event.type == KEYDOWN and event.key == K_SPACE:
@@ -204,7 +202,7 @@ def calc_offset(cursor):
 def load_mapchips(dir, file):
     """マップチップをロードしてMap.imagesに格納"""
     file = os.path.join(dir, file)
-    fp = open(file, "r")
+    fp = open(file)
     for line in fp:
         line = line.rstrip()  # 改行除去
         data = line.split(",")  # カンマで分解
@@ -227,7 +225,7 @@ class MessageEngine:
         """文字色をセット"""
         self.color = color
         # 変な値だったらWHITEにする
-        if not self.color in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
+        if self.color not in [self.WHITE,self.RED,self.GREEN,self.BLUE]:
             self.color = self.WHITE
     def draw_character(self, screen, pos, ch):
         """1文字だけ描画する"""

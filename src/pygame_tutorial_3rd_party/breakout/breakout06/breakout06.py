@@ -1,16 +1,17 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import math
 import os
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 372, 384)
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCR_RECT.size)
-    pygame.display.set_caption(u"Breakout 06 スコアの表示")
+    pygame.display.set_caption("Breakout 06 スコアの表示")
 
     # サウンドのロード
     Ball.paddle_sound = load_sound("wood00.wav")
@@ -160,7 +161,7 @@ class Brick(pygame.sprite.Sprite):
         self.rect.left = SCR_RECT.left + x * self.rect.width
         self.rect.top = SCR_RECT.top + y * self.rect.height
 
-class ScoreBoard():
+class ScoreBoard:
     """スコアボード"""
     def __init__(self):
         self.sysfont = pygame.font.SysFont(None, 80)

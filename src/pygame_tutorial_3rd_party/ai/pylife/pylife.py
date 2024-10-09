@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import pygame
-from pygame.locals import *
 import random
 import sys
+
+import pygame
+from pygame.locals import *
 
 SCR_RECT = Rect(0, 0, 800, 600)  # スクリーンサイズ
 CS = 10  # セルのサイズ

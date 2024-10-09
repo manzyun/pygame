@@ -1,8 +1,9 @@
 #!/usr/bin/env python
+import os
+import sys
+
 import pygame
 from pygame.locals import *
-import sys
-import os
 
 SCR_RECT = Rect(0, 0, 640, 480)
 GS = 32
