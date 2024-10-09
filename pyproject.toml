@@ -36,7 +36,8 @@ newbie = [
 ]
 
 [tool.hatch.envs.default.scripts]
-basic-01 = "python src/pygame_tutorial_3rd_party/01_basic/01_window/"
+basic-01 = "python src/pygame_tutorial_3rd_party/01_basic/01_window"
+basic-02 = "python src/pygame_tutorial_3rd_party/01_basic/02_draw_text"
 
 [project.urls]
 Documentation = "https://aidiary.hatenablog.com/entry/20080507/1269694935"
